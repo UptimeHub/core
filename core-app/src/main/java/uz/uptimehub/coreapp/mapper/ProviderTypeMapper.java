@@ -13,5 +13,5 @@ public interface ProviderTypeMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
-    void updateEntity(ProviderTypeCreateRequest request, @MappingTarget ProviderType entity);
+    void updateEntity(ProviderTypeDto request, @MappingTarget ProviderType entity);
 }
