@@ -21,7 +21,7 @@ public class FilteredSortedPaginatedRequest<T extends Filter, E extends RuntimeE
     public FilteredSortedPaginatedRequest(T filter, Pageable incomingPageable, Supplier<E> exceptionProvider) {
         this.filter = filter;
 
-        if (isSortRuleValid(incomingPageable)) {
+        if (!isSortRuleValid(incomingPageable)) {
             throw exceptionProvider.get();
         }
 
