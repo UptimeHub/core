@@ -1,4 +1,4 @@
-package uz.uptimehub.coreapi.exception;
+package uz.uptimehub.core.exception;
 
 public class EntityNotFoundException extends RuntimeException {
     public EntityNotFoundException(String message) {

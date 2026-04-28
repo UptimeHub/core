@@ -1,8 +1,8 @@
 package uz.uptimehub.coreapp.mapper;
 
 import org.mapstruct.*;
-import uz.uptimehub.coreapi.dto.providertype.ProviderTypeCreateRequest;
-import uz.uptimehub.coreapi.dto.providertype.ProviderTypeDto;
+import uz.uptimehub.core.dto.providertype.ProviderTypeCreateRequest;
+import uz.uptimehub.core.dto.providertype.ProviderTypeDto;
 import uz.uptimehub.coreapp.jpa.entity.ProviderType;
 
 @Mapper(componentModel = "spring")

@@ -1,4 +1,4 @@
-package uz.uptimehub.coreapi.dto.providertype;
+package uz.uptimehub.core.dto.providertype;
 
 import jakarta.validation.constraints.NotNull;
 

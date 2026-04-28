@@ -1,4 +1,4 @@
-package uz.uptimehub.coreapi.pagination;
+package uz.uptimehub.core.pagination;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

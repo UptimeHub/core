@@ -1,10 +1,9 @@
-package uz.uptimehub.coreapi.pagination;
+package uz.uptimehub.core.pagination;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import javax.swing.*;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;

@@ -2,9 +2,9 @@ package uz.uptimehub.coreapp.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.uptimehub.coreapi.dto.providertype.ProviderTypeCreateRequest;
-import uz.uptimehub.coreapi.dto.providertype.ProviderTypeDto;
-import uz.uptimehub.coreapi.exception.EntityNotFoundException;
+import uz.uptimehub.core.dto.providertype.ProviderTypeCreateRequest;
+import uz.uptimehub.core.dto.providertype.ProviderTypeDto;
+import uz.uptimehub.core.exception.EntityNotFoundException;
 import uz.uptimehub.coreapp.jpa.entity.ProviderType;
 import uz.uptimehub.coreapp.jpa.repository.ProviderTypeRepository;
 import uz.uptimehub.coreapp.mapper.ProviderTypeMapper;

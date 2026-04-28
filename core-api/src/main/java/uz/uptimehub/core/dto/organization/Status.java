@@ -1,4 +1,4 @@
-package uz.uptimehub.coreapi.dto.organization;
+package uz.uptimehub.core.dto.organization;
 
 public enum Status {
     ACTIVE,

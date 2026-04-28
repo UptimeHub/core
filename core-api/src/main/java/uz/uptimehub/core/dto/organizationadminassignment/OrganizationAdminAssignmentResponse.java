@@ -1,6 +1,6 @@
-package uz.uptimehub.coreapi.dto.organizationadminassignment;
+package uz.uptimehub.core.dto.organizationadminassignment;
 
-import uz.uptimehub.coreapi.dto.organization.OrganizationSummaryResponse;
+import uz.uptimehub.core.dto.organization.OrganizationSummaryResponse;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

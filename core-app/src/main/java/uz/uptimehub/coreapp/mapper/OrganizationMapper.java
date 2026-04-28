@@ -1,11 +1,11 @@
 package uz.uptimehub.coreapp.mapper;
 
 import org.mapstruct.*;
-import uz.uptimehub.coreapi.dto.organization.OrganizationCreateRequest;
-import uz.uptimehub.coreapi.dto.organization.OrganizationDetailedResponse;
-import uz.uptimehub.coreapi.dto.organization.OrganizationSummaryResponse;
-import uz.uptimehub.coreapi.dto.organization.OrganizationUpdateRequest;
-import uz.uptimehub.coreapi.dto.organizationadminassignment.OrganizationAdminAssignmentResponse;
+import uz.uptimehub.core.dto.organization.OrganizationCreateRequest;
+import uz.uptimehub.core.dto.organization.OrganizationDetailedResponse;
+import uz.uptimehub.core.dto.organization.OrganizationSummaryResponse;
+import uz.uptimehub.core.dto.organization.OrganizationUpdateRequest;
+import uz.uptimehub.core.dto.organizationadminassignment.OrganizationAdminAssignmentResponse;
 import uz.uptimehub.coreapp.jpa.entity.Organization;
 import uz.uptimehub.coreapp.jpa.entity.OrganizationAdminAssignment;
 import uz.uptimehub.coreapp.jpa.entity.ProviderType;

@@ -1,4 +1,4 @@
-package uz.uptimehub.coreapi.dto.organization;
+package uz.uptimehub.core.dto.organization;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
