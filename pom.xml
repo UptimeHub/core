@@ -25,6 +25,7 @@
         <java.version>25</java.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <lombok.version>1.18.46</lombok.version>
+        <springdoc.version>2.8.17</springdoc.version>
     </properties>
 
     <dependencyManagement>
@@ -49,6 +50,11 @@
                 <groupId>uz.uptimehub</groupId>
                 <artifactId>core-api</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
