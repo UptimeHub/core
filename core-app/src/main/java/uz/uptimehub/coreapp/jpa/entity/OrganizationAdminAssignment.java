@@ -1,10 +1,7 @@
 package uz.uptimehub.coreapp.jpa.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -16,6 +13,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "organization_admin_assignment", indexes = {
         @Index(name = "organization_admin_assignment_organization_id_idx", columnList = "organization_id"),
         @Index(name = "organization_admin_assignment_keycloak_user_id_idx", columnList = "keycloak_user_id")
