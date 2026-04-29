@@ -1,14 +1,19 @@
 package uz.uptimehub.core.dto.organization;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 import java.util.UUID;
 
-public record OrganizationUpdateRequest(
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class OrganizationUpdateRequest {
         @NotNull(message = "Organization ID is required")
-        UUID id,
-        String name,
-        String taxpayerIdNumber,
-        String email
-) {
+        private UUID id;
+        private String name;
+        private String taxpayerIdNumber;
+        private String email;
 }

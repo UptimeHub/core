@@ -1,8 +1,10 @@
 package uz.uptimehub.coreapp.service;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import uz.uptimehub.core.dto.organization.*;
 import uz.uptimehub.core.exception.EntityNotFoundException;
 import uz.uptimehub.core.exception.InvalidSortRule;
@@ -29,8 +31,9 @@ public class OrganizationService {
         return organizationMapper.toDetailedResponse(organizationRepository.save(organizationMapper.toOrganization(request, providerType)));
     }
 
+    @Transactional
     public OrganizationDetailedResponse update(OrganizationUpdateRequest request) {
-        Organization organization = findOrganizationAndValidateId(request.id());
+        Organization organization = findOrganizationAndValidateId(request.getId());
 
         organizationMapper.updateOrganization(request, organization);
 
@@ -62,6 +65,16 @@ public class OrganizationService {
                 "status", Arrays.stream(Status.values()).map(Enum::name).collect(Collectors.toSet()),
                 "providerTypeId", organizationRepository.findAllProviderTypeIds()
         );
+    }
+
+    @Transactional
+    public void setOrganizationStatus(UUID organizationId, boolean activate) {
+        findOrganizationAndValidateId(organizationId).setStatus(activate ? Status.ACTIVE : Status.INACTIVE);
+        organizationRepository.save(findOrganizationAndValidateId(organizationId));
+    }
+
+    public UUID organizationIdOverride(HttpServletRequest request) {
+        return request.getHeader("X-Organization-Id") != null ? UUID.fromString(request.getHeader("X-Organization-Id")) : null;
     }
 
 
