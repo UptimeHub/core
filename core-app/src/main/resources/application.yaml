@@ -1,10 +1,17 @@
 spring:
   application:
     name: core-app
+  config:
+    import: optional:file:../.env[.properties]
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
 
 keycloak:
   server-url: ${KEYCLOAK_SERVER_URL:http://localhost:8080}
   realm: ${KEYCLOAK_REALM:master}
   client-id: ${KEYCLOAK_CLIENT_ID:client-id}
   client-secret: ${KEYCLOAK_CLIENT_SECRET:client-secret}
+
+server:
+  port: 8081
 
