@@ -26,6 +26,7 @@ import java.util.UUID;
 public class KeycloakService {
 
     private final Keycloak keycloak;
+    private static final String ORGANIZATION_ID_ATTRIBUTE = "organization_id";
 
     @Value("${keycloak.realm}")
     private String realm;
@@ -55,8 +56,8 @@ public class KeycloakService {
         user.setEmailVerified(true);
         user.setEnabled(true);
 
-        if (organizationId != null)
-            user.singleAttribute("organizationId", organizationId.toString());
+        if (role == UserRole.ORGANIZATION_ADMIN)
+            user.singleAttribute(ORGANIZATION_ID_ATTRIBUTE, organizationId.toString());
 
         Response response = realmResource.users().create(user);
 
@@ -79,7 +80,7 @@ public class KeycloakService {
 
         return switch (role) {
             case ORGANIZATION_ADMIN -> realmResource.users()
-                    .searchByAttributes("organizationId:" + organizationId)
+                    .searchByAttributes(ORGANIZATION_ID_ATTRIBUTE + ":" + organizationId)
                     .stream()
                     .map(user -> toUserResponse(user, role))
                     .toList();
@@ -103,8 +104,11 @@ public class KeycloakService {
 
     private UserResponse toUserResponse(UserRepresentation user, UserRole role) {
         UUID organizationId = null;
-        if (user.getAttributes() != null && user.getAttributes().containsKey("organizationId")) {
-            organizationId = UUID.fromString(user.getAttributes().get("organizationId").getFirst());
+        if (user.getAttributes() != null) {
+            List<String> organizationIds = user.getAttributes().get(ORGANIZATION_ID_ATTRIBUTE);
+            if (organizationIds != null && !organizationIds.isEmpty()) {
+                organizationId = UUID.fromString(organizationIds.getFirst());
+            }
         }
 
         return new UserResponse(
@@ -119,7 +123,6 @@ public class KeycloakService {
     }
 
     private void assertRoleTypeAndOrganizationId(UUID organizationId, UserRole role) {
-        log.info("Organization id: {}, role: {}", organizationId, role);
         if ((organizationId == null && role == UserRole.ORGANIZATION_ADMIN) ||
                 (organizationId != null && role == UserRole.PLATFORM_ADMIN))
             throw new BadRequestException("Organization id is required for organization admin role");
