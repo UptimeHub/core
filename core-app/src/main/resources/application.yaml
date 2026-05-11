@@ -2,7 +2,8 @@ spring:
   application:
     name: core-app
   config:
-    import: optional:file:../.env[.properties]
+    import:
+      - optional:file:.env[.properties]
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}
 
