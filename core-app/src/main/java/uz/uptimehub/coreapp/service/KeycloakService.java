@@ -125,7 +125,7 @@ public class KeycloakService {
     private void assertRoleTypeAndOrganizationId(UUID organizationId, UserRole role) {
         if ((organizationId == null && role == UserRole.ORGANIZATION_ADMIN) ||
                 (organizationId != null && role == UserRole.PLATFORM_ADMIN))
-            throw new BadRequestException("Organization id is required for organization admin role");
+            throw new BadRequestException("Organization id is required only for organization admin role");
     }
 
     private void assertUserExists(RealmResource realmResource, String username, String email) {
