@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -56,8 +57,8 @@ public class OrganizationController {
     @Operation(description = "Get all organizations. Only Admins can get access")
     public Page<OrganizationSummaryResponse> getOrganizationsByFilter(
             @Parameter(description = "Filter criteria")
-            OrganizationFilter filter,
-            Pageable pageable
+            @ParameterObject OrganizationFilter filter,
+            @ParameterObject Pageable pageable
     ) {
         return organizationService.findAll(
                 new FilteredSortedPaginatedRequest<>(filter, pageable, InvalidSortRule::new)

@@ -3,6 +3,7 @@ package uz.uptimehub.coreapp.service;
 import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.keycloak.admin.client.CreatedResponseUtil;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.RealmResource;
@@ -19,6 +20,7 @@ import uz.uptimehub.core.exception.EntityAlreadyExistsException;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class KeycloakService {
@@ -117,7 +119,9 @@ public class KeycloakService {
     }
 
     private void assertRoleTypeAndOrganizationId(UUID organizationId, UserRole role) {
-        if (organizationId != null && role != UserRole.ORGANIZATION_ADMIN)
+        log.info("Organization id: {}, role: {}", organizationId, role);
+        if ((organizationId == null && role == UserRole.ORGANIZATION_ADMIN) ||
+                (organizationId != null && role == UserRole.PLATFORM_ADMIN))
             throw new BadRequestException("Organization id is required for organization admin role");
     }
 

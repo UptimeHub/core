@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.validation.annotation.Validated;
@@ -41,8 +42,8 @@ public class ProviderTypeController {
     @Operation(description = "Get all provider types")
     public Page<ProviderTypeDto> getProviderTypesByFilter(
             @Parameter(description = "Filter criteria")
-            ProviderTypeFilter filter,
-            Pageable pageable
+            @ParameterObject ProviderTypeFilter filter,
+            @ParameterObject Pageable pageable
     ) {
         return providerTypeService.getAll(new FilteredSortedPaginatedRequest<>(filter, pageable, InvalidSortRule::new));
     }

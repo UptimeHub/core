@@ -23,7 +23,7 @@ public class OrganizationFilter extends Filter {
     private String email;
     @Schema(description = "Organization status")
     @SortPropertyOverride("o.status")
-    private String status;
+    private Status status;
     @Schema(description = "Provider type ID")
     @SortPropertyOverride("o.providerTypeId")
     private Long providerTypeId;

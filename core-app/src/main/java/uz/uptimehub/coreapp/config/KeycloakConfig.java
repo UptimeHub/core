@@ -23,7 +23,7 @@ public class KeycloakConfig {
         log.info("Server URL: {}", serverUrl);
         log.info("Realm: {}", realm);
         log.info("Client ID: {}", clientId);
-        log.info("Client Secret: {}", clientSecret);
+        log.info("Client Secret configured: {}", clientSecret != null && !clientSecret.isBlank());
 
         return KeycloakBuilder.builder()
                 .serverUrl(serverUrl)
