@@ -12,6 +12,13 @@ keycloak:
   client-id: ${KEYCLOAK_CLIENT_ID:client-id}
   client-secret: ${KEYCLOAK_CLIENT_SECRET:client-secret}
 
+springdoc:
+  swagger-ui:
+    enabled: false
+    oauth:
+      client-id: frontend-client
+      use-pkce-with-authorization-code-grant: true
+      scopes: openid profile email
+
 server:
   port: 8081
-
