@@ -33,6 +33,6 @@ jobs:
       working-directory: '.'
       image-name: 'core'
       dockerfile: './core-app/Dockerfile'
-      docker-context: '.'
+      docker-context: './core-app'
       publish-image: ${{ github.event_name == 'push' }}
 
