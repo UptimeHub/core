@@ -33,6 +33,11 @@ public interface OrganizationMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "providerType", ignore = true)
+    @Mapping(target = "organizationAdminAssignments", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
     void updateOrganization(OrganizationUpdateRequest request, @MappingTarget Organization organization);
 
     @Mapping(target = "organizationResponse", source = "organization")

@@ -8,6 +8,7 @@ import uz.uptimehub.coreapp.jpa.entity.ProviderType;
 @Mapper(componentModel = "spring")
 public interface ProviderTypeMapper {
 
+    @Mapping(target = "id", ignore = true)
     ProviderType toEntity(ProviderTypeCreateRequest request);
     ProviderTypeDto toDto(ProviderType entity);
 
