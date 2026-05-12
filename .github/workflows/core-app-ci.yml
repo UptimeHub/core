@@ -5,11 +5,25 @@ on:
     branches:
       - main
       - develop
+    paths:
+      - "core-app/**"
+      - "core-api/**"
+      - "pom.xml"
+      - ".github/workflows/core-app-ci.yml"
 
   pull_request:
     branches:
       - main
       - develop
+    paths:
+      - "core-app/**"
+      - "core-api/**"
+      - "pom.xml"
+      - ".github/workflows/core-app-ci.yml"
+
+permissions:
+  contents: read
+  packages: write
 
 jobs:
   core-app:
