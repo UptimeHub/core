@@ -1,0 +1,24 @@
+name: Core CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  core-app:
+    uses: UptimeHub/infra/.github/workflows/java-service-ci.yml@main
+    with:
+      java-version: '25'
+      working-directory: '.'
+      image-name: 'core'
+      dockerfile: './core-app/Dockerfile'
+      docker-context: '.'
+      publish-image: ${{ github.event_name == 'push' }}
+

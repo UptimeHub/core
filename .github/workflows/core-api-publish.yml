@@ -1,0 +1,19 @@
+name: Publish Core API
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "core-api/**"
+      - "pom.xml"
+      - ".github/workflows/core-api-publish.yml"
+
+jobs:
+  publish-core-api:
+    uses: UptimeHub/infra/.github/workflows/maven-package-publish.yml@main
+    with:
+      java-version: '25'
+      working-directory: '.'
+      module: 'core-api'
+

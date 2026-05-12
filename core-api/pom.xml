@@ -15,6 +15,15 @@
     <properties>
         <spring-cloud.version>2025.1.1</spring-cloud.version>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Github Packages</name>
+            <url>https://maven.pkg.github.com/UptimeHub/core</url>
+        </repository>
+    </distributionManagement>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
