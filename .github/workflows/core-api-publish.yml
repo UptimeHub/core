@@ -11,6 +11,7 @@ on:
 
 jobs:
   publish-core-api:
+    name: Publish Core API
     uses: UptimeHub/infra/.github/workflows/maven-package-publish.yml@main
     with:
       java-version: '25'
