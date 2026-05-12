@@ -9,6 +9,7 @@ on:
       - "core-app/**"
       - "core-api/**"
       - "pom.xml"
+      - "Dockerfile"
       - ".github/workflows/core-app-ci.yml"
 
   pull_request:
@@ -19,6 +20,7 @@ on:
       - "core-app/**"
       - "core-api/**"
       - "pom.xml"
+      - "Dockerfile"
       - ".github/workflows/core-app-ci.yml"
 
 permissions:
@@ -32,7 +34,7 @@ jobs:
       java-version: '25'
       working-directory: '.'
       image-name: 'core'
-      dockerfile: './core-app/Dockerfile'
-      docker-context: './core-app'
+      dockerfile: './Dockerfile'
+      docker-context: '.'
       publish-image: ${{ github.event_name == 'push' }}
 
