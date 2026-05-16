@@ -13,8 +13,6 @@ import uz.uptimehub.coreapp.jpa.entity.ProviderType;
 import uz.uptimehub.coreapp.jpa.repository.ProviderTypeRepository;
 import uz.uptimehub.coreapp.mapper.ProviderTypeMapper;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -22,14 +20,6 @@ public class ProviderTypeService {
     private final ProviderTypeRepository providerTypeRepository;
     private final ProviderTypeMapper providerTypeMapper;
 
-    private static final Map<String, String> FILTER_PROPERTY_QUERIES = new LinkedHashMap<>();
-
-    static {
-        FILTER_PROPERTY_QUERIES.put(
-                "name",
-                ":name is null or :name = '' or lower(pt.name) like lower(concat('%', :name, '%'))"
-        );
-    }
 
     public ProviderTypeDto save(ProviderTypeCreateRequest request) {
         return providerTypeMapper.toDto(providerTypeRepository.save(providerTypeMapper.toEntity(request)));

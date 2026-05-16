@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.keycloak.admin.client.CreatedResponseUtil;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.resource.RealmResource;
-import org.keycloak.representations.idm.ClientRepresentation;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
@@ -44,6 +43,7 @@ public class KeycloakService {
             UserRole role
     ) {
         assertRoleTypeAndOrganizationId(organizationId, role);
+
         RealmResource realmResource = keycloak.realm(realm);
 
         assertUserExists(realmResource, username, email);
@@ -56,8 +56,9 @@ public class KeycloakService {
         user.setEmailVerified(true);
         user.setEnabled(true);
 
-        if (role == UserRole.ORGANIZATION_ADMIN)
+        if (role == UserRole.ORGANIZATION_ADMIN) {
             user.singleAttribute(ORGANIZATION_ID_ATTRIBUTE, organizationId.toString());
+        }
 
         Response response = realmResource.users().create(user);
 
@@ -68,7 +69,7 @@ public class KeycloakService {
         String userId = CreatedResponseUtil.getCreatedId(response);
 
         setPassword(realmResource, userId, password);
-        setRole(realmResource, userId, role);
+        assignRealmRole(realmResource, userId, role.name());
 
         return userId;
     }
@@ -82,24 +83,47 @@ public class KeycloakService {
             case ORGANIZATION_ADMIN -> realmResource.users()
                     .searchByAttributes(ORGANIZATION_ID_ATTRIBUTE + ":" + organizationId)
                     .stream()
+                    .filter(user -> hasRealmRole(realmResource, user.getId(), UserRole.ORGANIZATION_ADMIN.name()))
                     .map(user -> toUserResponse(user, role))
                     .toList();
 
-            case PLATFORM_ADMIN -> realmResource.clients()
-                    .findByClientId(clientId)
+            case PLATFORM_ADMIN -> realmResource.roles()
+                    .get(UserRole.PLATFORM_ADMIN.name())
+                    .getUserMembers()
                     .stream()
-                    .findFirst()
-                    .map(client -> realmResource.clients()
-                            .get(client.getId())
-                            .roles()
-                            .get(role.name())
-                            .getUserMembers()
-                            .stream()
-                            .map(user -> toUserResponse(user, role))
-                            .toList()
-                    )
-                    .orElse(List.of());
+                    .map(user -> toUserResponse(user, role))
+                    .toList();
         };
+    }
+
+    private void assignRealmRole(
+            RealmResource realmResource,
+            String userId,
+            String roleName
+    ) {
+        RoleRepresentation role = realmResource.roles()
+                .get(roleName)
+                .toRepresentation();
+
+        realmResource.users()
+                .get(userId)
+                .roles()
+                .realmLevel()
+                .add(List.of(role));
+    }
+
+    private boolean hasRealmRole(
+            RealmResource realmResource,
+            String userId,
+            String roleName
+    ) {
+        return realmResource.users()
+                .get(userId)
+                .roles()
+                .realmLevel()
+                .listEffective()
+                .stream()
+                .anyMatch(role -> roleName.equals(role.getName()));
     }
 
     private UserResponse toUserResponse(UserRepresentation user, UserRole role) {
@@ -135,24 +159,6 @@ public class KeycloakService {
         realmResource.users().search(email).stream().findFirst().ifPresent(_ -> {
             throw new EntityAlreadyExistsException("User already exists: " + email);
         });
-    }
-
-    private void setRole(RealmResource realmResource, String userId, UserRole roleName) {
-        ClientRepresentation client = realmResource.clients()
-                .findByClientId(clientId)
-                .getFirst();
-
-        RoleRepresentation role = realmResource.clients()
-                .get(client.getId())
-                .roles()
-                .get(roleName.name())
-                .toRepresentation();
-
-        realmResource.users()
-                .get(userId)
-                .roles()
-                .clientLevel(client.getId())
-                .add(List.of(role));
     }
 
     private void setPassword(RealmResource realmResource, String userId, String password) {
