@@ -18,7 +18,7 @@ import uz.uptimehub.coreapp.service.ProviderTypeService;
 
 
 @RestController
-@RequestMapping("/api/provider-type")
+@RequestMapping("/api/core/provider-type")
 @RequiredArgsConstructor
 @Validated
 @Tag(name = "Provider Type Controller", description = "Provider Type management API")

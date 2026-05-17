@@ -28,7 +28,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @Validated
-@RequestMapping("/api/organization")
+@RequestMapping("/api/core/organization")
 @CrossOrigin
 @Tag(name = "Organization Controller", description = "Organization management API")
 public class OrganizationController {
