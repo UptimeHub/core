@@ -20,6 +20,5 @@ jobs:
     uses: UptimeHub/infra/.github/workflows/maven-package-publish.yml@main
     with:
       java-version: '25'
-      working-directory: '.'
-      module: 'core-api'
-
+      working-directory: 'core-api'
+      module: '.'
