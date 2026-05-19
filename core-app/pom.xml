@@ -66,6 +66,7 @@
         <dependency>
             <groupId>uz.uptimehub</groupId>
             <artifactId>core-api</artifactId>
+            <version>0.0.3</version>
         </dependency>
 
         <dependency>
