@@ -8,7 +8,7 @@ public class AuthHeaderUtils {
     private AuthHeaderUtils() {
     }
 
-    public static String[] extractPermissions(String header) {
+    public static String[] extractRolesOrPermissions(String header) {
 
         if (header == null || header.isEmpty()) {
             return new String[0];
