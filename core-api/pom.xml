@@ -12,7 +12,7 @@
 
     <artifactId>core-api</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.6</version>
+    <version>0.0.7</version>
 
     <properties>
         <spring-cloud.version>2025.1.1</spring-cloud.version>
