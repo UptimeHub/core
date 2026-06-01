@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @OpenAPIDefinition(
         info = @Info(title = "UptimeHub API", version = "1.0"),
         servers = {@Server(url = "http://localhost:8899", description = "Local Server"),
-                @Server(url = "http://http://84.247.166.242:8899", description = "Dev Server")},
+                @Server(url = "http://84.247.166.242:8899", description = "Dev Server")},
         security = @SecurityRequirement(name = "Keycloak")
 )
 @SecurityScheme(
