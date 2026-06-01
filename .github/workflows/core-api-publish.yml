@@ -18,6 +18,7 @@ jobs:
   publish-core-api:
     name: Publish Core API
     uses: UptimeHub/infra/.github/workflows/maven-package-publish.yml@main
+    secrets: inherit
     with:
       java-version: '25'
       working-directory: 'core-api'
