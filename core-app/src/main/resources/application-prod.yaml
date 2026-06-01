@@ -6,4 +6,4 @@ spring:
     database: postgresql
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
