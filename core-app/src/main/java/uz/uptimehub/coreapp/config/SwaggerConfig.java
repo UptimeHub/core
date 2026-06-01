@@ -14,7 +14,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(title = "UptimeHub API", version = "1.0"),
-        servers = @Server(url = "http://localhost:8899", description = "Local Server"),
+        servers = {@Server(url = "http://localhost:8899", description = "Local Server"),
+                @Server(url = "http://http://84.247.166.242:8899", description = "Dev Server")},
         security = @SecurityRequirement(name = "Keycloak")
 )
 @SecurityScheme(
@@ -22,8 +23,8 @@ import org.springframework.context.annotation.Configuration;
         type = SecuritySchemeType.OAUTH2,
         flows = @OAuthFlows(
                 authorizationCode = @OAuthFlow(
-                        authorizationUrl = "http://localhost:8080/realms/booking-system/protocol/openid-connect/auth",
-                        tokenUrl = "http://localhost:8080/realms/booking-system/protocol/openid-connect/token",
+                        authorizationUrl = "http://84.247.166.242:8080/realms/booking-system/protocol/openid-connect/auth",
+                        tokenUrl = "http://84.247.166.242:8080/realms/booking-system/protocol/openid-connect/token",
                         scopes = {
                                 @OAuthScope(name = "openid", description = "OpenID Connect scope"),
                                 @OAuthScope(name = "profile", description = "User profile"),
